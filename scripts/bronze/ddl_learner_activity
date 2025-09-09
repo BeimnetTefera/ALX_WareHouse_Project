@@ -1,5 +1,5 @@
 CREATE TABLE bronze.pw_learner_activity(
-	  first_name NVARCHAR(50),
+	first_name NVARCHAR(50),
     last_name NVARCHAR(50),
     email NVARCHAR(100),
     course_name NVARCHAR(150),
@@ -36,7 +36,7 @@ CREATE TABLE bronze.pw_learner_activity(
     course_deferred_date DATETIME,
     on_track_for_on_time_graduation NVARCHAR(3),
     on_track_for_delayed_graduation NVARCHAR(3),
-	  is_assignment_resubmitted NVARCHAR(3),
+	is_assignment_resubmitted NVARCHAR(3),
     iassignment_resubmitted_and_not_corrected_yet NVARCHAR(3),
     is_assignment_graded NVARCHAR(3),
     is_assignment_corrected_by_an_external_grader NVARCHAR(3),
