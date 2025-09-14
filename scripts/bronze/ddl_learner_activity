@@ -1,3 +1,6 @@
+IF OBJECT_ID('bronze.pw_learner_activity', 'U') IS NOT NULL
+	DROP TABLE bronze.pw_learner_activity;
+
 CREATE TABLE bronze.pw_learner_activity(
 	first_name NVARCHAR(50),
     last_name NVARCHAR(50),
