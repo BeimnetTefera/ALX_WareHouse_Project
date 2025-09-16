@@ -1,1 +1,15 @@
+BULK INSERT bronze.pw_learner_activity
+FROM '/var/opt/mssql/datasets/source_crm/bronze.crm_cust_info.csv'
+WITH (
+      FIRSTROW = 2, 
+      FIELDTERMINATOR = ',',
+      TABLOCK
+);
 
+BULK INSERT bronze.pw_learner_tracking_overview
+FROM '/var/opt/mssql/datasets/source_crm/bronze.crm_cust_info.csv'
+WITH (
+      FIRSTROW = 2, 
+      FIELDTERMINATOR = ',',
+      TABLOCK
+);
