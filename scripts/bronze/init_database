@@ -11,13 +11,15 @@ WARNING:
 	Make sure to back up your data!
 */
 
+USE Master;
+GO
+
 -- DROP AND RECRREATE THE 'DataWarehouse' DATABASE --
 IF EXISTS (SELECT 1 FROM sys.databases WHERE name = 'AlxDataWareHouse')
 BEGIN 
 	ALTER DATABASE AlxDataWareHouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 	DROP DATABASE AlxDataWareHouse;
 END
-
 GO
 
 -- CREATE DATABASE WAREHOUSE --
