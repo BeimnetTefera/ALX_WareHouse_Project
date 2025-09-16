@@ -1,3 +1,15 @@
+/*
+================================================================================
+DDL Script: Create Bronze Table
+================================================================================
+Script Purpose:
+    This script creates table in the 'bronze' schema, dropping existing table
+    if they already exixst
+Run this script to re-define the DDL structure of 'bronze' tables
+*/
+
+USE DataWarehouse;
+
 IF OBJECT_ID('bronze.pw_learner_activity', 'U') IS NOT NULL
 	DROP TABLE bronze.pw_learner_activity;
 
