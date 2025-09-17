@@ -1,10 +1,26 @@
+/*
+================================================================================
+DDL Script: Create Silver Tables
+================================================================================
+Script Purpose:
+    This script creates tables in the 'Silver' schema, dropping existing tables
+    if they already exixst
+Run this script to re-define the DDL structure of 'Silver' tables
+*/
+
 USE AlxDataWareHouse;
+GO
 
 ----------------------------------------------------------
 -- Drop Table 'silver.pw_learner_activity' if exists
 ----------------------------------------------------------
+
 IF OBJECT_ID('silver.pw_learner_activity', 'U') IS NOT NULL
     DROP TABLE silver.pw_learner_activity;
+
+----------------------------------------------------------
+-- Create Table 'silver.pw_learner_activity' 
+----------------------------------------------------------
 
 CREATE TABLE silver.pw_learner_activity(
     first_name NVARCHAR(100),
@@ -77,8 +93,14 @@ CREATE TABLE silver.pw_learner_activity(
 ----------------------------------------------------------
 -- Drop Table 'silver.pw_learner_tracking_overview' if exists
 ----------------------------------------------------------
+
 IF OBJECT_ID('silver.pw_learner_tracking_overview', 'U') IS NOT NULL
     DROP TABLE silver.pw_learner_tracking_overview;
+
+
+----------------------------------------------------------
+-- Create Table 'silver.pw_learner_tracking_overview' 
+----------------------------------------------------------
 
 CREATE TABLE silver.pw_learner_tracking_overview(
     first_name NVARCHAR(100),
