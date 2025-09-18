@@ -14,9 +14,11 @@ GO
 -- Drop Silver tables if they exist
 IF OBJECT_ID('silver.pw_learner_activity', 'U') IS NOT NULL
     DROP TABLE silver.pw_learner_activity;
+GO
 
 IF OBJECT_ID('silver.pw_learner_tracking_overview', 'U') IS NOT NULL
     DROP TABLE silver.pw_learner_tracking_overview;
+GO
 
 -- Create pw_learner_activity (Silver)
 CREATE TABLE silver.pw_learner_activity(
@@ -87,6 +89,7 @@ CREATE TABLE silver.pw_learner_activity(
     course_leave_of_absence_reason NVARCHAR(250),
     assignments_submitted_and_failed NVARCHAR(250)  -- fixed mismatch
 );
+GO
 
 -- Create pw_learner_tracking_overview (Silver)
 CREATE TABLE silver.pw_learner_tracking_overview(
@@ -155,6 +158,3 @@ CREATE TABLE silver.pw_learner_tracking_overview(
     course_leave_of_absence_reason NVARCHAR(250),
     nile_cohort_name NVARCHAR(50)
 );
-
-
-
