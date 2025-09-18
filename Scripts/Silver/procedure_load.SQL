@@ -156,7 +156,7 @@ SELECT
     TRIM(on_track_for_on_time_graduation) AS on_track_for_on_time_graduation,
     TRIM(on_track_for_delayed_graduation) AS on_track_for_delayed_graduation,
     TRIM(is_assignment_resubmitted) AS is_assignment_resubmitted,
-    TRIM(is_assignment_resubmitted_and_not_corrected_yet) AS iassignment_resubmitted_and_not_corrected_yet,
+    TRIM(is_assignment_resubmitted_and_not_corrected_yet) AS is_assignment_resubmitted_and_not_corrected_yet,
     TRIM(is_assignment_graded) AS is_assignment_graded,
     TRIM(is_assignment_corrected_by_an_external_grader) AS is_assignment_corrected_by_an_external_grader,
     TRIM(corrected_external_grader_name) AS corrected_external_grader_name,
