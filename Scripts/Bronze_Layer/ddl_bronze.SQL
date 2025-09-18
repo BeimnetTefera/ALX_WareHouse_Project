@@ -65,7 +65,7 @@ CREATE TABLE bronze.pw_learner_activity(
     submission_link NVARCHAR(250),
     no_of_assignmnets NVARCHAR(20),
     no_of_submissions NVARCHAR(20),
-    no_assignments_passed NVARCHAR(20),
+    no_of_assignments_passed NVARCHAR(20),
     no_of_milestone NVARCHAR(20),
     no_of_milestone_submissions NVARCHAR(20),
     no_of_milestones_passed NVARCHAR(20),
