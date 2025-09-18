@@ -11,17 +11,14 @@ Run this script to re-define the DDL structure of 'Silver' tables
 USE AlxDataWareHouse;
 GO
 
-----------------------------------------------------------
--- Drop Table 'silver.pw_learner_activity' if exists
-----------------------------------------------------------
-
+-- Drop Silver tables if they exist
 IF OBJECT_ID('silver.pw_learner_activity', 'U') IS NOT NULL
     DROP TABLE silver.pw_learner_activity;
 
-----------------------------------------------------------
--- Create Table 'silver.pw_learner_activity' 
-----------------------------------------------------------
+IF OBJECT_ID('silver.pw_learner_tracking_overview', 'U') IS NOT NULL
+    DROP TABLE silver.pw_learner_tracking_overview;
 
+-- Create pw_learner_activity (Silver)
 CREATE TABLE silver.pw_learner_activity(
     first_name NVARCHAR(100),
     last_name NVARCHAR(100),
@@ -38,10 +35,10 @@ CREATE TABLE silver.pw_learner_activity(
     category_country_of_residences NVARCHAR(50),
     city_of_residence NVARCHAR(50),
     day_of_activation INT,
-    cohort_name NVARCHAR(10),
+    cohort_name NVARCHAR(20),
     class_name NVARCHAR(20),
-    location_program_cohort NVARCHAR(20),
-    assignment_type NVARCHAR(15),
+    location_program_cohort NVARCHAR(50),
+    assignment_type NVARCHAR(20),
     assignment_score FLOAT,
     learner_enrolled_into_lms NVARCHAR(5),
     has_logged_into_lms NVARCHAR(5),
@@ -87,21 +84,11 @@ CREATE TABLE silver.pw_learner_activity(
     ehub_course_status NVARCHAR(10),
     ehub_class_status NVARCHAR(10),
     is_course_paused NVARCHAR(5),
-    course_leave_of_absence_reason NVARCHAR(250)
+    course_leave_of_absence_reason NVARCHAR(250),
+    assignments_submitted_and_failed NVARCHAR(250)  -- fixed mismatch
 );
 
-----------------------------------------------------------
--- Drop Table 'silver.pw_learner_tracking_overview' if exists
-----------------------------------------------------------
-
-IF OBJECT_ID('silver.pw_learner_tracking_overview', 'U') IS NOT NULL
-    DROP TABLE silver.pw_learner_tracking_overview;
-
-
-----------------------------------------------------------
--- Create Table 'silver.pw_learner_tracking_overview' 
-----------------------------------------------------------
-
+-- Create pw_learner_tracking_overview (Silver)
 CREATE TABLE silver.pw_learner_tracking_overview(
     first_name NVARCHAR(100),
     last_name NVARCHAR(100),
@@ -110,15 +97,15 @@ CREATE TABLE silver.pw_learner_tracking_overview(
     no_of_submissions INT,
     no_of_assignments_passed INT,
     lms_overall_score FLOAT,
-    hubspot_id NVARCHAR(20),
+    hubspot_id NVARCHAR(50),
     contact_phone NVARCHAR(20),
     age INT,
     age_range NVARCHAR(15),
     country_of_residence NVARCHAR(50),
     category_country_of_residences NVARCHAR(50),
     city_of_residence NVARCHAR(50),
-    cohort_name NVARCHAR(10),
-    location_program_cohort NVARCHAR(20),
+    cohort_name NVARCHAR(20),
+    location_program_cohort NVARCHAR(50),
     learner_enrolled_into_lms NVARCHAR(5),
     has_logged_into_lms NVARCHAR(5),
     has_logged_into_eHub NVARCHAR(5),
@@ -150,7 +137,7 @@ CREATE TABLE silver.pw_learner_tracking_overview(
     assignments_submitted NVARCHAR(250),
     assignments_missing NVARCHAR(250),
     assignments_passed NVARCHAR(250),
-    assignments_submitted_and_failed NVARCHAR(250),
+    assignments_submitted_and_failed NVARCHAR(250),  -- fixed mismatch
     learner_hub_city NVARCHAR(50),
     first_check_in DATETIME,
     most_recent_check_in DATETIME,
@@ -168,4 +155,6 @@ CREATE TABLE silver.pw_learner_tracking_overview(
     course_leave_of_absence_reason NVARCHAR(250),
     nile_cohort_name NVARCHAR(50)
 );
+
+
 
