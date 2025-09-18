@@ -9,17 +9,12 @@ Run this script to re-define the DDL structure of 'bronze' tables
 */
 
 USE AlxDataWareHouse;
-GO
 
--- Drop Bronze tables if they exist
-
+----------------------------------------------------------
+-- Drop Table 'bronze.pw_learner_activity' if exists
+----------------------------------------------------------
 IF OBJECT_ID('bronze.pw_learner_activity', 'U') IS NOT NULL
     DROP TABLE bronze.pw_learner_activity;
-
-IF OBJECT_ID('bronze.pw_learner_tracking_overview', 'U') IS NOT NULL
-    DROP TABLE bronze.pw_learner_tracking_overview;
-
--- Create pw_learner_activity
 
 CREATE TABLE bronze.pw_learner_activity(
     first_name NVARCHAR(50),
@@ -86,11 +81,14 @@ CREATE TABLE bronze.pw_learner_activity(
     ehub_course_status NVARCHAR(50),
     ehub_class_status NVARCHAR(50),
     is_course_paused NVARCHAR(20),
-    course_leave_of_absence_reason NVARCHAR(MAX),
-    assignments_submitted_and_failed NVARCHAR(MAX)  -- fixed mismatch
+    course_leave_of_absence_reason NVARCHAR(MAX)
 );
 
--- Create pw_learner_tracking_overview
+----------------------------------------------------------
+-- Drop Table 'bronze.pw_learner_tracking_overview' if exists
+----------------------------------------------------------
+IF OBJECT_ID('bronze.pw_learner_tracking_overview', 'U') IS NOT NULL
+    DROP TABLE bronze.pw_learner_tracking_overview;
 
 CREATE TABLE bronze.pw_learner_tracking_overview(
     first_name NVARCHAR(50),
@@ -98,7 +96,7 @@ CREATE TABLE bronze.pw_learner_tracking_overview(
     email NVARCHAR(100),
     course_name NVARCHAR(150),
     no_of_submissions NVARCHAR(50),
-    no_of_assignments_passed NVARCHAR(50),
+    no_assignments_passed NVARCHAR(50),
     lms_overall_score NVARCHAR(50),
     hubspot_id NVARCHAR(100),
     contact_phone NVARCHAR(50),
@@ -140,7 +138,7 @@ CREATE TABLE bronze.pw_learner_tracking_overview(
     assignments_submitted NVARCHAR(MAX),
     assignments_missing NVARCHAR(MAX),
     assignments_passed NVARCHAR(MAX),
-    assignments_submitted_and_failed NVARCHAR(MAX),  -- fixed mismatch
+    assignments_submitted_and_failed NVARCHAR(MAX),
     learner_hub_city NVARCHAR(50),
     first_check_in NVARCHAR(50),
     most_recent_check_in NVARCHAR(50),
@@ -158,4 +156,3 @@ CREATE TABLE bronze.pw_learner_tracking_overview(
     course_leave_of_absence_reason NVARCHAR(MAX),
     nile_cohort_name NVARCHAR(50)
 );
-
