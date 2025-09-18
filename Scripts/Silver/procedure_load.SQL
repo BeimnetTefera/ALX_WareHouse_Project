@@ -52,7 +52,7 @@ BEGIN
             age,
             age_range,
             country_of_residence,
-            category_country_of_residence,
+            category_country_of_residences,
             city_of_residence,
             day_of_activation,
             cohort_name,
