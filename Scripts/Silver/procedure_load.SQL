@@ -27,19 +27,19 @@ BEGIN
 
     BEGIN TRY
 
-        SET @batch_start_time = GETDATE();
-        PRINT '============================================================';
-        PRINT 'Loading Silver Layer';
-        PRINT '============================================================';
+    SET @batch_start_time = GETDATE();
+    PRINT '============================================================';
+    PRINT 'Loading Silver Layer';
+    PRINT '============================================================';
 
-        PRINT '============================================================';
-        PRINT 'Loading Learner Activity';
-        PRINT '============================================================';
+    PRINT '============================================================';
+    PRINT 'Loading Learner Activity';
+    PRINT '============================================================';
 
 
-SET @start_time = GETDATE();
-PRINT '>> Truncating Table: silver.pw_learner_activity';
-TRUNCATE TABLE silver.pw_learner_activity
+    SET @start_time = GETDATE();
+    PRINT '>> Truncating Table: silver.pw_learner_activity';
+    TRUNCATE TABLE silver.pw_learner_activity
 
 PRINT '>> Inserting Data Into: silver.pw_learner_activity';
 INSERT INTO silver.pw_learner_activity(
@@ -191,16 +191,15 @@ FROM bronze.pw_learner_activity;
     PRINT '--------------';
 
 
-        PRINT '-------------------------------------------------------------';
-        PRINT 'Loading Learner Tracking Overview Table';
-        PRINT '-------------------------------------------------------------';
+    PRINT '-------------------------------------------------------------';
+    PRINT 'Loading Learner Tracking Overview Table';
+    PRINT '-------------------------------------------------------------';
 
-        SET @start_time = GETDATE();
-        PRINT '>> Truncating Table: silver.pw_learner_tracking_overview';
-        TRUNCATE TABLE silver.pw_learner_tracking_overview;
+    SET @start_time = GETDATE();
+    PRINT '>> Truncating Table: silver.pw_learner_tracking_overview';
+    TRUNCATE TABLE silver.pw_learner_tracking_overview;
 
-        PRINT '>> Inserting Data Into: silver.pw_learner_tracking_overview';
-
+PRINT '>> Inserting Data Into: silver.pw_learner_tracking_overview';
 INSERT INTO silver.pw_learner_tracking_overview(
     first_name,
     last_name,
