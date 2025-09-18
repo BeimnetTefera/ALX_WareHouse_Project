@@ -88,7 +88,7 @@ BEGIN
             submission_link,
             no_of_assignmnets,
             no_of_submissions,
-            no_of_assignments_passed,
+            no_assignments_passed,
             no_of_milestone,
             no_of_milestone_submissions,
             no_of_milestones_passed,
@@ -126,7 +126,7 @@ BEGIN
             TRY_CAST(TRIM(age) AS INT),
             TRIM(age_range),
             TRIM(country_of_residence),
-            TRIM(category_country_of_residence),
+            TRIM(category_country_of_residences),
             TRIM(city_of_residence),
             TRY_CAST(TRIM(day_of_activation) AS INT),
             TRIM(cohort_name),
@@ -162,7 +162,7 @@ BEGIN
             TRIM(submission_link),
             TRY_CAST(TRIM(no_of_assignmnets) AS INT),
             TRY_CAST(TRIM(no_of_submissions) AS INT),
-            TRY_CAST(TRIM(no_of_assignments_passed) AS INT),
+            TRY_CAST(TRIM(no_assignments_passed) AS INT),
             TRY_CAST(TRIM(no_of_milestone) AS INT),
             TRY_CAST(TRIM(no_of_milestone_submissions) AS INT),
             TRY_CAST(TRIM(no_of_milestones_passed) AS INT),
@@ -195,7 +195,7 @@ BEGIN
             email,
             course_name,
             no_of_submissions,
-            no_of_assignments_passed,
+            no_assignments_passed,
             lms_overall_score,
             hubspot_id,
             contact_phone,
@@ -226,7 +226,7 @@ BEGIN
             no_of_assignments,
             no_of_milestone,
             no_of_milestone_submissions,
-            no_of_milestones_passed,
+            no_of_milestone_passed,
             no_of_practice_quiz,
             no_of_practice_quiz_submissions,
             no_of_practice_quiz_passed,
@@ -261,7 +261,7 @@ BEGIN
             TRIM(email),
             TRIM(course_name),
             TRY_CAST(TRIM(no_of_submissions) AS INT),
-            TRY_CAST(TRIM(no_of_assignments_passed) AS INT),
+            TRY_CAST(TRIM(no_assignments_passed) AS INT),
             TRY_CAST(TRIM(lms_overall_score) AS FLOAT),
             TRIM(hubspot_id),
             TRIM(
@@ -299,7 +299,7 @@ BEGIN
             TRY_CAST(TRIM(no_of_assignments) AS INT),
             TRY_CAST(TRIM(no_of_milestone) AS INT),
             TRY_CAST(TRIM(no_of_milestone_submissions) AS INT),
-            TRY_CAST(TRIM(no_of_milestones_passed) AS INT),
+            TRY_CAST(TRIM(no_of_milestone_passed) AS INT),
             TRY_CAST(TRIM(no_of_practice_quiz) AS INT),
             TRY_CAST(TRIM(no_of_practice_quiz_submissions) AS INT),
             TRY_CAST(TRIM(no_of_practice_quiz_passed) AS INT),
@@ -345,4 +345,3 @@ BEGIN
         PRINT '============================================================';
     END CATCH
 END;
-
