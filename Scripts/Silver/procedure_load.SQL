@@ -1,3 +1,20 @@
+/*
+================================================================================
+Load and Clean Learner Activity Table (Silver Layer)
+================================================================================
+Script Purpose:
+    - Clean up string fields by removing unwanted spaces (using TRIM).
+    - Standardize phone numbers into a consistent format with +251 prefix.
+    - Convert text-based numeric fields (age, scores, counts, dates) into
+      the correct data types (INT, FLOAT, DATETIME).
+    - Prepare the cleaned dataset from 'bronze.pw_learner_activity' to be
+      stored in the 'Silver' layer for downstream analytics.
+
+    Run this script to re-define and clean the DDL structure of the Silver
+    learner activity table.
+*/
+
+
 SELECT
     TRIM(first_name) AS first_name,
     TRIM(last_name) AS last_name,
