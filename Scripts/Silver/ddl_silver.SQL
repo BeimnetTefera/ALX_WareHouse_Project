@@ -149,7 +149,7 @@ CREATE TABLE silver.pw_learner_tracking_overview(
     check_ins_last_30_days INT,
     meets_attendance_criteria NVARCHAR(5),
     most_visited_hub NVARCHAR(50),
-    is_lms_overall_score_higher_than_score_threshold NVARCHAR(5),
+    is_lms_overall_score_higher_than_threshold NVARCHAR(5),
     lms_course_status NVARCHAR(15),
     ehub_course_status NVARCHAR(10),
     ehub_class_status NVARCHAR(10),
