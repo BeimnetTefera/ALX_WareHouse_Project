@@ -70,7 +70,7 @@ CREATE TABLE silver.pw_learner_activity(
     submission_link NVARCHAR(250),
     no_of_assignmnets INT,
     no_of_submissions INT,
-    no_assignments_passed INT,
+    no_of_assignments_passed INT,
     no_of_milestone INT,
     no_of_milestone_submissions INT,
     no_of_milestones_passed INT,
