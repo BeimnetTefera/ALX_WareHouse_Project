@@ -35,13 +35,12 @@ BEGIN
         PRINT 'Loading Bronze Layer';
         PRINT '============================================================';
 
+        -- Load pw_learner_activity
         PRINT '-------------------------------------------------------------';
         PRINT 'Loading bronze.pw_learner_activity';
         PRINT '-------------------------------------------------------------';
 
-        -- Learner Activity Table
         SET @start_time = GETDATE();
-        PRINT '>> Truncating Table: bronze.pw_learner_activity';
         TRUNCATE TABLE bronze.pw_learner_activity;
 
         BULK INSERT bronze.pw_learner_activity
@@ -52,49 +51,51 @@ BEGIN
             ROWTERMINATOR = '\n',
             FORMAT = 'CSV',
             CODEPAGE = '65001',
-            TABLOCK
+            TABLOCK,
+            KEEPNULLS,
+            FIELDQUOTE = '"'
         );
 
         SET @end_time = GETDATE();
-        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
-        PRINT '--------------';
+        PRINT '>> Load Duration (Learner Activity): ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
 
-        -- Learners Tracking Overview
+        -- Load pw_learner_tracking_overview
+        PRINT '-------------------------------------------------------------';
+        PRINT 'Loading bronze.pw_learner_tracking_overview';
+        PRINT '-------------------------------------------------------------';
+
         SET @start_time = GETDATE();
-        PRINT '>> Truncating Table: bronze.pw_learner_tracking_overview';
         TRUNCATE TABLE bronze.pw_learner_tracking_overview;
 
         BULK INSERT bronze.pw_learner_tracking_overview
         FROM 'C:\project\alx\Term 2_ Pathway C1 Learners Academic Activity_August 19th - Learners Tracking Overview.csv'
         WITH (
             FIRSTROW = 2,
-            FIELDTERMINATOR = ',', 
+            FIELDTERMINATOR = ',',
             ROWTERMINATOR = '\n',
-            FIELDQUOTE = '"',
-            CODEPAGE = '65001',  -- UTF-8
-            KEEPNULLS,
+            FORMAT = 'CSV',
+            CODEPAGE = '65001',
             TABLOCK,
-            FORMAT = 'CSV'
+            KEEPNULLS,
+            FIELDQUOTE = '"'
         );
 
         SET @end_time = GETDATE();
-        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
-        PRINT '--------------';
+        PRINT '>> Load Duration (Learner Tracking Overview): ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
 
         SET @batch_end_time = GETDATE();
         PRINT '================================================';
-        PRINT 'Loading Bronze Layer is Completed.';
+        PRINT 'Loading Bronze Layer Completed';
         PRINT '>> Total Load Duration: ' + CAST(DATEDIFF(second, @batch_start_time, @batch_end_time) AS NVARCHAR) + ' seconds';
         PRINT '================================================';
 
-        END TRY
-    
-        BEGIN CATCH
-            PRINT '============================================================';
-            PRINT 'ERROR OCCURRED DURING LOADING BRONZE LAYER';
-            PRINT 'Error Message: ' + ERROR_MESSAGE();
-            PRINT 'Error Number: ' + CAST(ERROR_NUMBER() AS NVARCHAR);
-            PRINT 'Error State: ' + CAST(ERROR_STATE() AS NVARCHAR);
-            PRINT '============================================================';
-        END CATCH
+    END TRY
+    BEGIN CATCH
+        PRINT '============================================================';
+        PRINT 'ERROR OCCURRED DURING LOADING BRONZE LAYER';
+        PRINT 'Error Message: ' + ERROR_MESSAGE();
+        PRINT 'Error Number: ' + CAST(ERROR_NUMBER() AS NVARCHAR);
+        PRINT 'Error State: ' + CAST(ERROR_STATE() AS NVARCHAR);
+        PRINT '============================================================';
+    END CATCH
 END;
