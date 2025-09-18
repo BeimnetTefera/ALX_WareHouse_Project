@@ -88,7 +88,7 @@ BEGIN
             submission_link,
             no_of_assignmnets,
             no_of_submissions,
-            no_assignments_passed,
+            no_of_assignments_passed,
             no_of_milestone,
             no_of_milestone_submissions,
             no_of_milestones_passed,
