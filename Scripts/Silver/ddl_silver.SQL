@@ -34,7 +34,7 @@ CREATE TABLE silver.pw_learner_activity(
     age INT,
     age_range NVARCHAR(15),
     country_of_residence NVARCHAR(50),
-    category_country_of_residence NVARCHAR(50),
+    category_country_of_residences NVARCHAR(50),
     city_of_residence NVARCHAR(50),
     day_of_activation INT,
     cohort_name NVARCHAR(20),
