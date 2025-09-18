@@ -86,8 +86,7 @@ CREATE TABLE silver.pw_learner_activity(
     ehub_course_status NVARCHAR(10),
     ehub_class_status NVARCHAR(10),
     is_course_paused NVARCHAR(5),
-    course_leave_of_absence_reason NVARCHAR(250),
-    assignments_submitted_and_failed NVARCHAR(250)  -- fixed mismatch
+    course_leave_of_absence_reason NVARCHAR(250)
 );
 GO
 
