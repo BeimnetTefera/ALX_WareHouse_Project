@@ -18,26 +18,6 @@ Usage Example:
 ============================================================================
 */
 
-/*
-=============================================================================
-Stored Procedure: Load Bronze Layer (Source -> Bronze)
-=============================================================================
-Script Puropse:
-    This stored procedure loads data in to the 'bronze' schema from external CSV files.
-    It performs the following actions:
-        - Truncates the bronze tables before loading data.
-        - Uses the 'Bulk Insert' command to load data from CSV files to bronze tables.
-
-Parameters:
-    None
-    This stored procedure does not accept any parameters or return any values.
-
-Usage Example:
-    EXEC  bronze.load_bronze;
-
-============================================================================
-*/
-
 USE AlxDataWareHouse;
 GO
 
@@ -64,16 +44,16 @@ BEGIN
         PRINT '>> Truncating Table: bronze.pw_learner_activity';
         TRUNCATE TABLE bronze.pw_learner_activity;
 
-    BULK INSERT bronze.pw_learner_activity
-    FROM 'C:\project\alx\Term 2_ Pathway C1 Learners Academic Activity_August 19th - Learners Activity.csv'
-    WITH (
-        FIRSTROW = 2,
-        FIELDTERMINATOR = ',',
-        ROWTERMINATOR = '\r\n',
-        CODEPAGE = '65001',
-        TABLOCK,
-        DATAFILETYPE = 'char'
-    );
+        BULK INSERT bronze.pw_learner_activity
+        FROM 'C:\project\alx\Term 2_ Pathway C1 Learners Academic Activity_August 19th - Learners Activity.csv'
+        WITH (
+            FIRSTROW = 2,
+            FIELDTERMINATOR = ',',
+            ROWTERMINATOR = '\n',
+            FORMAT = 'CSV',
+            CODEPAGE = '65001',
+            TABLOCK
+        );
 
         SET @end_time = GETDATE();
         PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
@@ -85,18 +65,17 @@ BEGIN
         TRUNCATE TABLE bronze.pw_learner_tracking_overview;
 
         BULK INSERT bronze.pw_learner_tracking_overview
-    FROM 'C:\project\alx\Term 2_ Pathway C1 Learners Academic Activity_August 19th - Learners Tracking Overview.csv'
-    WITH (
-        FIRSTROW = 2,
-        FIELDTERMINATOR = ',',
-        ROWTERMINATOR = '\r\n',
-        FIELDQUOTE = '"',
-        CODEPAGE = '65001',
-        KEEPNULLS,
-        TABLOCK,
-        DATAFILETYPE = 'char'
-    );
-
+        FROM 'C:\project\alx\Term 2_ Pathway C1 Learners Academic Activity_August 19th - Learners Tracking Overview.csv'
+        WITH (
+            FIRSTROW = 2,
+            FIELDTERMINATOR = ',', 
+            ROWTERMINATOR = '\n',
+            FIELDQUOTE = '"',
+            CODEPAGE = '65001',  -- UTF-8
+            KEEPNULLS,
+            TABLOCK,
+            FORMAT = 'CSV'
+        );
 
         SET @end_time = GETDATE();
         PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
