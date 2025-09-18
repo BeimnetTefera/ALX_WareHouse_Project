@@ -61,7 +61,7 @@ CREATE TABLE silver.pw_learner_activity(
     on_track_for_on_time_graduation NVARCHAR(5),
     on_track_for_delayed_graduation NVARCHAR(5),
     is_assignment_resubmitted NVARCHAR(5),
-    iassignment_resubmitted_and_not_corrected_yet NVARCHAR(5),
+    is_assignment_resubmitted_and_not_corrected_yet NVARCHAR(5),
     is_assignment_graded NVARCHAR(5),
     is_assignment_corrected_by_an_external_grader NVARCHAR(50),
     corrected_external_grader_name NVARCHAR(50),
