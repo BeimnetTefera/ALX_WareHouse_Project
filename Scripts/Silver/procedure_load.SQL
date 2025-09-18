@@ -104,8 +104,7 @@ BEGIN
             ehub_course_status,
             ehub_class_status,
             is_course_paused,
-            course_leave_of_absence_reason,
-            assignments_submitted_and_failed
+            course_leave_of_absence_reason
         )
         SELECT
             TRIM(first_name),
@@ -179,8 +178,7 @@ BEGIN
             TRIM(ehub_course_status),
             TRIM(ehub_class_status),
             TRIM(is_course_paused),
-            TRIM(course_leave_of_absence_reason),
-            TRIM(assignments_submitted_and_failed)
+            TRIM(course_leave_of_absence_reason)
         FROM bronze.pw_learner_activity;
 
         -- Load pw_learner_tracking_overview
