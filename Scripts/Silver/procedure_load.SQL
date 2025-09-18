@@ -275,7 +275,7 @@ BEGIN
             TRY_CAST(TRIM(age) AS INT),
             TRIM(age_range),
             TRIM(country_of_residence),
-            TRIM(category_country_of_residences),
+            TRIM(category_country_of_residence),
             TRIM(city_of_residence),
             TRIM(cohort_name),
             TRIM(location_program_cohort),
