@@ -162,7 +162,7 @@ BEGIN
             TRIM(submission_link),
             TRY_CAST(TRIM(no_of_assignmnets) AS INT),
             TRY_CAST(TRIM(no_of_submissions) AS INT),
-            TRY_CAST(TRIM(no_assignments_passed) AS INT),
+            TRY_CAST(TRIM(no_of_assignments_passed) AS INT),
             TRY_CAST(TRIM(no_of_milestone) AS INT),
             TRY_CAST(TRIM(no_of_milestone_submissions) AS INT),
             TRY_CAST(TRIM(no_of_milestones_passed) AS INT),
