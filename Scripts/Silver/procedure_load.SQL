@@ -11,9 +11,11 @@ Script Purpose:
       stored in the 'Silver' layer for downstream analytics.
 
     Run this script to re-define and clean the DDL structure of the Silver
-    learner activity table.
+    learner activity and learner tracking overview tables.
 */
-
+/*
+learner activity table
+*/
 
 SELECT
     TRIM(first_name) AS first_name,
@@ -89,7 +91,9 @@ SELECT
     TRIM(is_course_paused) AS is_course_paused,
     TRIM(course_leave_of_absence_reason) AS course_leave_of_absence_reason
 FROM bronze.pw_learner_activity;
-
+/*
+learner tracking overview table
+*/
 
 SELECT
     TRIM(first_name) AS first_name,
