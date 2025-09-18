@@ -9,7 +9,7 @@ Run this script to re-define the DDL structure of 'bronze' tables
 */
 
 USE AlxDataWareHouse;
-
+GO
 ----------------------------------------------------------
 -- Drop Table 'bronze.pw_learner_activity' if exists
 ----------------------------------------------------------
