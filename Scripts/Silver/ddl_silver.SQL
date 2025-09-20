@@ -97,7 +97,7 @@ CREATE TABLE silver.pw_learner_tracking_overview(
     email NVARCHAR(100),
     course_name NVARCHAR(150),
     no_of_submissions INT,
-    no_of_assignments_passed INT,
+    no_assignments_passed INT,
     lms_overall_score FLOAT,
     hubspot_id NVARCHAR(50),
     contact_phone NVARCHAR(20),
