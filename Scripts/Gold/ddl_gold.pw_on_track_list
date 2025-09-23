@@ -1,0 +1,42 @@
+USE AlxDataWareHouse;
+GO
+
+-- 1. Create the Gold table
+CREATE TABLE gold.pw_on_track_list (
+    first_name NVARCHAR(100),
+    last_name NVARCHAR(100),
+    email NVARCHAR(100),
+    course_name NVARCHAR(150),
+    lms_overall_score FLOAT,
+    is_lms_overall_score_higher_than_threshold NVARCHAR(5),
+    is_on_track NVARCHAR(5)
+);
+GO
+
+-- 2. Insert data from Silver into Gold
+INSERT INTO gold.pw_on_track_list (
+    first_name,
+    last_name,
+    email,
+    course_name,
+    lms_overall_score,
+    is_lms_overall_score_higher_than_threshold,
+    is_on_track
+)
+SELECT
+    first_name,
+    last_name,
+    email,
+    course_name,
+    lms_overall_score,
+    CASE 
+        WHEN lms_overall_score >= 70 THEN 'YES'
+        ELSE 'NO'
+    END AS is_lms_overall_score_higher_than_threshold,
+    CASE 
+        WHEN lms_overall_score >= 70 THEN 'YES'
+        ELSE 'NO'
+    END AS is_on_track
+FROM silver.pw_learner_activity;
+GO
+
