@@ -1,8 +1,6 @@
 USE AlxDataWareHouse;
 GO
 
--- 2. Insert data from Silver into Gold
-
 SELECT
     first_name AS First_Nmae,
     last_name,
@@ -17,7 +15,5 @@ SELECT
         WHEN lms_overall_score >= 70 THEN 'YES'
         ELSE 'NO'
     END AS is_on_track
+    
 FROM silver.pw_learner_activity;
-
-
-;
