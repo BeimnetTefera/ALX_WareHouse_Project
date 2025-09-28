@@ -2,7 +2,7 @@ USE AlxDataWareHouse;
 GO
 
 SELECT
-    first_name AS First_Nmae,
+    first_name,
     last_name,
     email,
     course_name,
