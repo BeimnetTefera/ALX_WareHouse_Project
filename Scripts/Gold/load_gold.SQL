@@ -1,6 +1,26 @@
 USE AlxDataWareHouse;
 GO
 
+INSERT INTO pw_final(
+	First_Name,
+    Last_Name,
+    Email,
+    Phone_Number,
+    Assignment_Name,
+    Is_Assignment_Accessed,
+    Is_Assignment_Submitted,
+    Is_Assignment_Passed,
+    Assignment_Type,
+    Is_Assignment_Resubmitted_And_Not_Corrected_Yet,
+    Is_Assignment_Corrected_by_an_External_Grader,
+    Age,
+    Lms_Overall_Score,
+    No_of_Submissions,
+    Course_Name,
+    Country_of_Residence,
+    Cohort_Name,
+    Is_Program_Withdrawn
+)
 SELECT 
     la.first_name,
     la.last_name,
