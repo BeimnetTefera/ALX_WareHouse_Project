@@ -1,3 +1,10 @@
+USE AlxDataWareHouse;
+GO
+
+-- Drop Gold tables if they exist
+IF OBJECT_ID('gold.pw_final', 'U') IS NOT NULL
+    DROP TABLE gold.pw_final;
+
 CREATE TABLE pw_final( 
 	First_Name,
     Last_Name,
