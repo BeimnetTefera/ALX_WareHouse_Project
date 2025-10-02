@@ -1,13 +1,20 @@
-IF OBJECT_ID('gold.pw_learner_activity', 'U') IS NOT NULL
-    DROP TABLE gold.pw_learner_activity;
-
-CREATE TABLE gold.pw_learner_activity(
-	First_Name NVARCHAR(50),
-	Last_Name NVARCHAR(50),
-	Phone_Number NVARCHAR(13),
-	Email NVARCHAR(150),
-	Course_Name NVARCHAR(MAX),
-	LMS_Overall_Score FLOAT,
-	LMS_Greater_than_70 NVARCHAR(5),
-	On_Track NVARCHAR(5)
+CREATE TABLE pw_final( 
+	First_Name,
+    Last_Name,
+    Email,
+    Phone_Number,
+    Assignment_Name,
+    Is_Assignment_Accessed,
+    Is_Assignment_Submitted,
+    Is_Assignment_Passed,
+    Assignment_Type,
+    Is_Assignment_Resubmitted_And_Not_Corrected_Yet,
+    Is_Assignment_Corrected_by_an_External_Grader,
+    Age,
+    Lms_Overall_Score,
+    No_of_Submissions,
+    Course_Name,
+    Country_of_Residence,
+    Cohort_Name,
+    Is_Program_Withdrawn
 )
