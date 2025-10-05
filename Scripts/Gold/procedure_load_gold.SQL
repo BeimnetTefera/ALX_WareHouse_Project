@@ -3,85 +3,96 @@ GO
 
 WITH learner_base AS (
     SELECT
-        la.first_name,
-        la.last_name,
-        la.email,
-        la.contact_phone,
-        lto.age,
-        lto.lms_overall_score,
-        lto.course_name,
+        f.First_Name,
+        f.Last_Name,
+        f.Email,
+        f.Phone_Number,
+        f.Age,
+        f.Lms_Overall_Score,
+        f.Course_Name,
 
-        -- Group failed and missing assignments by course
+        -- Assignments
         STRING_AGG(
-            CASE 
-                WHEN la.is_assignment_passed = 'No' AND la.is_assignment_submitted = 'Yes' 
-                    THEN CAST(la.assignment_name AS NVARCHAR(MAX)) 
-            END, ', '
+            CASE WHEN f.Is_Assignment_Passed = 'No' AND f.Is_Assignment_Submitted = 'Yes' 
+                 THEN CAST(f.Assignment_Name AS NVARCHAR(MAX)) END, ', '
         ) AS failed_assignments,
         STRING_AGG(
-            CASE 
-                WHEN la.is_assignment_submitted = 'No' 
-                    THEN CAST(la.assignment_name AS NVARCHAR(MAX)) 
-            END, ', '
-        ) AS missing_assignments
-    FROM silver.pw_learner_activity la
-    JOIN silver.pw_learner_tracking_overview lto
-        ON la.email = lto.email
-    GROUP BY la.first_name, la.last_name, la.email, la.contact_phone,
-             lto.age, lto.lms_overall_score, lto.course_name
+            CASE WHEN f.Is_Assignment_Submitted = 'No' 
+                 THEN CAST(f.Assignment_Name AS NVARCHAR(MAX)) END, ', '
+        ) AS missing_assignments,
+
+        -- ✅ Counts
+        COUNT(CASE WHEN f.Is_Assignment_Submitted = 'Yes' THEN 1 END) AS submitted_count,
+        COUNT(CASE WHEN f.Is_Assignment_Passed = 'Yes' AND f.Is_Assignment_Submitted = 'Yes' THEN 1 END) AS passed_count
+
+    FROM .pw_final f
+    GROUP BY 
+        f.First_Name, f.Last_Name, f.Email, f.Phone_Number,
+        f.Age, f.Lms_Overall_Score, f.Course_Name
 )
 
 SELECT
-    lb.first_name,
-    lb.last_name,
-    lb.email,
-    lb.contact_phone,
+    lb.First_Name,
+    lb.Last_Name,
+    lb.Email,
+    lb.Phone_Number,
 
-    -- Age Range
+    -- Age range
     CASE 
-        WHEN lb.age BETWEEN 18 AND 20 THEN '18-20'
-        WHEN lb.age BETWEEN 21 AND 23 THEN '21-23'
-        WHEN lb.age BETWEEN 24 AND 26 THEN '24-26'
-        ELSE '27+'
-    END AS age_range,
+        WHEN lb.Age BETWEEN 18 AND 20 THEN '18-20'
+        WHEN lb.Age BETWEEN 21 AND 23 THEN '21-23'
+        WHEN lb.Age BETWEEN 24 AND 26 THEN '24-26'
+        ELSE '26+'
+    END AS Age_Range,
 
-    -- === BUS 200: Business Finance ===
-    COALESCE(MAX(CASE WHEN lb.course_name = 'BUS 200: Business Finance' THEN lb.missing_assignments END), 'All Good ✅') AS BUS200_Missed,
-    COALESCE(MAX(CASE WHEN lb.course_name = 'BUS 200: Business Finance' THEN lb.failed_assignments END), 'All Good ✅') AS BUS200_Failed,
-    MAX(CASE WHEN lb.course_name = 'BUS 200: Business Finance' THEN lb.lms_overall_score END) AS BUS200_Score,
+    -- === BUS 200 ===
+    MAX(CASE WHEN lb.Course_Name = 'BUS 200: Business Finance' THEN lb.submitted_count END) AS BUS200_#_Assignments_Submitted,
+    MAX(CASE WHEN lb.Course_Name = 'BUS 200: Business Finance' THEN lb.passed_count END) AS BUS200_#_Assignments_Passed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'BUS 200: Business Finance' THEN lb.missing_assignments  END), 'All Good ') AS BUS200_Missed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'BUS 200: Business Finance' THEN lb.failed_assignments END), 'All Good ') BUS200_Failed,
+    MAX(CASE WHEN lb.Course_Name = 'BUS 200: Business Finance' THEN lb.Lms_Overall_Score END) AS BUS200_Score,
 
-    -- === ENT 110: Introduction to Venture Creation ===
-    COALESCE(MAX(CASE WHEN lb.course_name = 'ENT 110: Introduction to Venture Creation' THEN lb.missing_assignments END), 'All Good ✅') AS ENT110_Missed,
-    COALESCE(MAX(CASE WHEN lb.course_name = 'ENT 110: Introduction to Venture Creation' THEN lb.failed_assignments END), 'All Good ✅') AS ENT110_Failed,
-    MAX(CASE WHEN lb.course_name = 'ENT 110: Introduction to Venture Creation' THEN lb.lms_overall_score END) AS ENT110_Score,
+    -- === ENT 110 ===
+    MAX(CASE WHEN lb.Course_Name = 'ENT 110: Introduction to Venture Creation' THEN lb.submitted_count END) AS ENT110_#_Assignments_Submitted,
+    MAX(CASE WHEN lb.Course_Name = 'ENT 110: Introduction to Venture Creation' THEN lb.passed_count END) AS ENT110_#_Assignments_Passed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'ENT 110: Introduction to Venture Creation' THEN lb.Missing_Assignments END), 'All Good ') AS ENT110_Missed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'ENT 110: Introduction to Venture Creation' THEN lb.Failed_Assignments END), 'All Good ') AS ENT110_Failed,
+    MAX(CASE WHEN lb.Course_Name = 'ENT 110: Introduction to Venture Creation' THEN lb.Lms_Overall_Score END) AS ENT110_Score,
 
-    -- === QNT 102: Introduction to Statistics ===
-    COALESCE(MAX(CASE WHEN lb.course_name = 'QNT 102: Introduction to Statistics' THEN lb.missing_assignments END), 'All Good ✅') AS QNT102_Missed,
-    COALESCE(MAX(CASE WHEN lb.course_name = 'QNT 102: Introduction to Statistics' THEN lb.failed_assignments END), 'All Good ✅') AS QNT102_Failed,
-    MAX(CASE WHEN lb.course_name = 'QNT 102: Introduction to Statistics' THEN lb.lms_overall_score END) AS QNT102_Score,
+    -- === QNT 102 ===
+    MAX(CASE WHEN lb.Course_Name = 'QNT 102: Introduction to Statistics' THEN lb.submitted_count END) AS QNT102_#_Assignments_Submitted,
+    MAX(CASE WHEN lb.Course_Name = 'QNT 102: Introduction to Statistics' THEN lb.passed_count END) AS QNT102_#_Assignments_Passed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'QNT 102: Introduction to Statistics' THEN lb.Missing_Assignments END), 'All Good ') AS QNT102_Missed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'QNT 102: Introduction to Statistics' THEN lb.Failed_Assignments END), 'All Good ') AS QNT102_Failed,
+    MAX(CASE WHEN lb.Course_Name = 'QNT 102: Introduction to Statistics' THEN lb.Lms_Overall_Score END) AS QNT102_Score,
 
-    -- === SE 101: Introduction to Computing ===
-    COALESCE(MAX(CASE WHEN lb.course_name = 'SE 101: Introduction to Computing' THEN lb.missing_assignments END), 'All Good ✅') AS SE101_Missed,
-    COALESCE(MAX(CASE WHEN lb.course_name = 'SE 101: Introduction to Computing' THEN lb.failed_assignments END), 'All Good ✅') AS SE101_Failed,
-    MAX(CASE WHEN lb.course_name = 'SE 101: Introduction to Computing' THEN lb.lms_overall_score END) AS SE101_Score,
+    -- === SE 101 ===
+    MAX(CASE WHEN lb.Course_Name = 'SE 101: Introduction to Computing' THEN lb.submitted_count END) AS SE101_#_Assignments_Submitted,
+    MAX(CASE WHEN lb.Course_Name = 'SE 101: Introduction to Computing' THEN lb.passed_count END) AS SE101_#_Assignments_Passed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'SE 101: Introduction to Computing' THEN lb.Missing_Assignments END), 'All Good ') AS SE101_Missed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'SE 101: Introduction to Computing' THEN lb.Failed_Assignments END), 'All Good ') AS SE101_Failed,
+    MAX(CASE WHEN lb.Course_Name = 'SE 101: Introduction to Computing' THEN lb.Lms_Overall_Score END) AS SE101_Score,
 
-    -- === SE 102: Foundations of Linux and Version Control ===
-    COALESCE(MAX(CASE WHEN lb.course_name = 'SE 102: Foundations of Linux and Version Control' THEN lb.missing_assignments END), 'All Good ✅') AS SE102_Missed,
-    COALESCE(MAX(CASE WHEN lb.course_name = 'SE 102: Foundations of Linux and Version Control' THEN lb.failed_assignments END), 'All Good ✅') AS SE102_Failed,
-    MAX(CASE WHEN lb.course_name = 'SE 102: Foundations of Linux and Version Control' THEN lb.lms_overall_score END) AS SE102_Score,
+    -- === SE 102 ===
+    MAX(CASE WHEN lb.Course_Name = 'SE 102: Foundations of Linux and Version Control' THEN lb.submitted_count END) AS SE102_#_Assignments_Submitted,
+    MAX(CASE WHEN lb.Course_Name = 'SE 102: Foundations of Linux and Version Control' THEN lb.passed_count END) AS SE102_#_Assignments_Passed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'SE 102: Foundations of Linux and Version Control' THEN lb.Missing_Assignments END), 'All Good ') AS SE102_Missed,
+    COALESCE(MAX(CASE WHEN lb.Course_Name = 'SE 102: Foundations of Linux and Version Control' THEN lb.Failed_Assignments END), 'All Good ') AS SE102_Failed,
+    MAX(CASE WHEN lb.Course_Name = 'SE 102: Foundations of Linux and Version Control' THEN lb.Lms_Overall_Score END) AS SE102_Score,
 
-    -- learner status
+    -- === Learner Status ===
     CASE
-        WHEN MAX(lb.lms_overall_score) >= 70 THEN 'On Track 🚀'
-        WHEN MAX(lb.lms_overall_score) BETWEEN 50 AND 69 THEN 'Needs Attention 👀'
-        ELSE 'Off Track 🤦'
-    END AS learner_status
+        WHEN MAX(lb.Lms_Overall_Score) >= 70 THEN 'On Track '
+        WHEN MAX(lb.Lms_Overall_Score) BETWEEN 50 AND 69 THEN 'Needs Improvement '
+        ELSE 'Off Track '
+    END AS Learner_Status
 
 FROM learner_base lb
-GROUP BY lb.first_name, lb.last_name, lb.email, lb.contact_phone,
-         CASE 
-            WHEN lb.age BETWEEN 18 AND 20 THEN '18-20'
-            WHEN lb.age BETWEEN 21 AND 23 THEN '21-23'
-            WHEN lb.age BETWEEN 24 AND 26 THEN '24-26'
-            ELSE '27+'
-         END;
+GROUP BY 
+    lb.First_Name, lb.Last_Name, lb.Email, lb.Phone_Number,
+    CASE 
+        WHEN lb.Age BETWEEN 18 AND 20 THEN '18-20'
+        WHEN lb.Age BETWEEN 21 AND 23 THEN '21-23'
+        WHEN lb.Age BETWEEN 24 AND 26 THEN '24-26'
+        ELSE '26+'
+    END;
