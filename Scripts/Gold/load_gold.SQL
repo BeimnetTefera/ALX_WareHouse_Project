@@ -1,8 +1,10 @@
 USE AlxDataWareHouse;
 GO
 
-INSERT INTO pw_final(
-	First_Name,
+TRUNCATE TABLE pw_final;
+
+INSERT INTO pw_final (
+    First_Name,
     Last_Name,
     Email,
     Phone_Number,
@@ -22,10 +24,10 @@ INSERT INTO pw_final(
     Is_Program_Withdrawn
 )
 SELECT 
-    la.first_name,
-    la.last_name,
-    la.email,
-    la.contact_phone,
+    COALESCE(la.first_name, lto.first_name) AS First_Name,
+    COALESCE(la.last_name, lto.last_name) AS Last_Name,
+    COALESCE(la.email, lto.email) AS Email,
+    COALESCE(la.contact_phone, lto.contact_phone) AS Phone_Number,
     la.assignment_name,
     la.is_assignment_accessed,
     la.is_assignment_submitted,
@@ -42,4 +44,4 @@ SELECT
     lto.is_program_withdrawn
 FROM silver.pw_learner_activity AS la
 RIGHT JOIN silver.pw_learner_tracking_overview AS lto
-    ON la.email = lto.email;
+    ON LOWER(LTRIM(RTRIM(la.email))) = LOWER(LTRIM(RTRIM(lto.email)));
