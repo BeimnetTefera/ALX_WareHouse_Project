@@ -11,21 +11,30 @@ WITH learner_base AS (
         f.Lms_Overall_Score,
         f.Course_Name,
 
-        -- Assignments
+        -- To list the assignmnets where it is submibmitted but failed
         STRING_AGG(
-            CASE WHEN f.Is_Assignment_Passed = 'No' AND f.Is_Assignment_Submitted = 'Yes' 
-                 THEN CAST(f.Assignment_Name AS NVARCHAR(MAX)) END, ', '
+            CASE 
+                 WHEN f.Is_Assignment_Passed = 'No' AND f.Is_Assignment_Submitted = 'Yes' 
+                 THEN CAST(f.Assignment_Name AS NVARCHAR(MAX)) 
+            END,  ', '
         ) AS failed_assignments,
+
+        -- To list not submitted assignmnets
         STRING_AGG(
-            CASE WHEN f.Is_Assignment_Submitted = 'No' 
-                 THEN CAST(f.Assignment_Name AS NVARCHAR(MAX)) END, ', '
+            CASE 
+                WHEN f.Is_Assignment_Submitted = 'No' 
+                THEN CAST(f.Assignment_Name AS NVARCHAR(MAX)) 
+            END, ', '
         ) AS missing_assignments,
 
-        --  Counts
+        --  Count submittted assignmnets wheteher it is passed or not
         COUNT(CASE WHEN f.Is_Assignment_Submitted = 'Yes' THEN 1 END) AS submitted_count,
+
+        -- count submitted and passed assignmnets
         COUNT(CASE WHEN f.Is_Assignment_Passed = 'Yes' AND f.Is_Assignment_Submitted = 'Yes' THEN 1 END) AS passed_count
 
     FROM .pw_final f
+
     GROUP BY 
         f.First_Name, f.Last_Name, f.Email, f.Phone_Number,
         f.Age, f.Lms_Overall_Score, f.Course_Name
@@ -37,7 +46,7 @@ SELECT
     lb.Email,
     lb.Phone_Number,
 
-    -- Age range
+    -- Age range calculated column
     CASE 
         WHEN lb.Age BETWEEN 18 AND 20 THEN '18-20'
         WHEN lb.Age BETWEEN 21 AND 23 THEN '21-23'
