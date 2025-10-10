@@ -1,3 +1,19 @@
+/*
+*******************************************************************************
+DDL Script: Create Gold Tables
+*******************************************************************************
+Script Purpose:
+    This script creates table for the Gold layer in the data warehouse.
+    The Gold layer Represents the final table
+
+    Each view performs transformations and combines data from the silver layer
+    to produce a clean, enriched, and business-ready dataset.
+
+Usage:
+    - The table can be queried directly for analytics and reporting.
+*******************************************************************************
+*/
+
 USE AlxDataWareHouse;
 GO
 
