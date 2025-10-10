@@ -107,8 +107,8 @@ BEGIN
             course_leave_of_absence_reason
         )
         SELECT
-            TRIM(first_name),
-            TRIM(last_name),
+            TRIM(UPPER(first_name)),
+            TRIM(UPPER(last_name)),
             TRIM(email),
             TRIM(course_name),
             TRIM(assignment_name),
