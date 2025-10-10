@@ -33,7 +33,7 @@ WITH learner_base AS (
         -- count submitted and passed assignmnets
         COUNT(CASE WHEN f.Is_Assignment_Passed = 'Yes' AND f.Is_Assignment_Submitted = 'Yes' THEN 1 END) AS passed_count
 
-    FROM .pw_final f
+    FROM gold.pw_final f
 
     GROUP BY 
         f.First_Name, f.Last_Name, f.Email, f.Phone_Number,
