@@ -21,7 +21,7 @@ WITH learner_base AS (
                  THEN CAST(f.Assignment_Name AS NVARCHAR(MAX)) END, ', '
         ) AS missing_assignments,
 
-        -- ✅ Counts
+        --  Counts
         COUNT(CASE WHEN f.Is_Assignment_Submitted = 'Yes' THEN 1 END) AS submitted_count,
         COUNT(CASE WHEN f.Is_Assignment_Passed = 'Yes' AND f.Is_Assignment_Submitted = 'Yes' THEN 1 END) AS passed_count
 
