@@ -74,11 +74,11 @@ SELECT
     MAX(CASE WHEN cp.course_name = 'SE 101: INTRODUCTION TO COMPUTING' THEN cp.lms_overall_score END) AS [SE 101: LMS Score],
 
     -- SE 102
-    MAX(CASE WHEN cp.course_name = 'SE 102: INTRODUCTION TO COMPUTING' THEN cp.no_of_submissions END) AS [SE 102: # Submitted],
-    MAX(CASE WHEN cp.course_name = 'SE 102: INTRODUCTION TO COMPUTING' THEN cp.no_of_assignments_passed END) AS [SE 102: # Passed],
-    COALESCE(MAX(CASE WHEN cp.course_name = 'SE 102: INTRODUCTION TO COMPUTING' THEN cp.failed_assignments END), 'All Good ') AS [SE 102: Failed Assignments],
-    COALESCE(MAX(CASE WHEN cp.course_name = 'SE 102: INTRODUCTION TO COMPUTING' THEN cp.missed_assignments END), 'All Good ') AS [SE 102: Missed Assignments],
-    MAX(CASE WHEN cp.course_name = 'SE 102: INTRODUCTION TO COMPUTING' THEN cp.lms_overall_score END) AS [SE 102: LMS Score],
+    MAX(CASE WHEN cp.course_name = 'SE 102: FOUNDATIONS OF LINUX AND VERSION CONTROL' THEN cp.no_of_submissions END) AS [SE 102: # Submitted],
+    MAX(CASE WHEN cp.course_name = 'SE 102: FOUNDATIONS OF LINUX AND VERSION CONTROL' THEN cp.no_of_assignments_passed END) AS [SE 102: # Passed],
+    COALESCE(MAX(CASE WHEN cp.course_name = 'SE 102: FOUNDATIONS OF LINUX AND VERSION CONTROL' THEN cp.failed_assignments END), 'All Good ') AS [SE 102: Failed Assignments],
+    COALESCE(MAX(CASE WHEN cp.course_name = 'SE 102: FOUNDATIONS OF LINUX AND VERSION CONTROL' THEN cp.missed_assignments END), 'All Good ') AS [SE 102: Missed Assignments],
+    MAX(CASE WHEN cp.course_name = 'SE 102: FOUNDATIONS OF LINUX AND VERSION CONTROL' THEN cp.lms_overall_score END) AS [SE 102: LMS Score],
 
     CASE
     WHEN MIN(CAST(cp.lms_overall_score AS FLOAT)) >= 70 THEN 'On Track'
