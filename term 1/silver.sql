@@ -4,7 +4,7 @@ SET
     first_name = REPLACE(first_name, '"', ''),
     last_name = REPLACE(last_name, '"', ''),
     email = REPLACE(email, '"', ''),
-    contact_phone = REPLACE(contact_phone, '"', ''),
+    contact_phone = REPLACE(REPLACE(contact_phone, '"', ''), '''', ''),
     age = REPLACE(age, '"', ''),
     age_range = REPLACE(age_range, '"', ''),
     country_of_residence = REPLACE(country_of_residence, '"', ''),
