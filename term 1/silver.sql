@@ -1,3 +1,4 @@
+USE AlxDataWareHouse
 -- Remove quotes from all NVARCHAR columns
 UPDATE bronze.pw_learner_activity
 SET
