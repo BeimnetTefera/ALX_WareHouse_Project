@@ -35,13 +35,13 @@ SELECT
     UPPER(TRIM(cp.last_name)) AS [Last_Name],
 
     TRIM(
-        CASE 
-            WHEN cp.contact_phone LIKE '+251%' THEN cp.contact_phone
-            WHEN cp.contact_phone LIKE '251%'  THEN CONCAT('+', cp.contact_phone)
-            WHEN cp.contact_phone LIKE '0%'    THEN CONCAT('+251', SUBSTRING(cp.contact_phone, 2, LEN(cp.contact_phone)))
-            ELSE CONCAT('+251', cp.contact_phone)
-        END
-    ) AS [Phone_Number],
+    CASE 
+        WHEN cp.contact_phone LIKE '+20%' THEN cp.contact_phone
+        WHEN cp.contact_phone LIKE '20%'  THEN CONCAT('+', cp.contact_phone)
+        WHEN cp.contact_phone LIKE '0%'   THEN CONCAT('+20', SUBSTRING(cp.contact_phone, 2, LEN(cp.contact_phone)))
+        ELSE CONCAT('+20', cp.contact_phone)
+    END
+) AS [Phone_Number],
     TRIM(cp.email) AS [Email],
     TRIM(cp.age_range) AS [Age_Range],
 
