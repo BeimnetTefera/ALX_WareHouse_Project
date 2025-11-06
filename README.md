@@ -40,8 +40,43 @@ Loads raw student activity data from a CSV file into the `bronze.pw_learner_acti
 ```sql
 EXEC bronze.load_bronze;
 ```
+# 2. Silver Layer — Data Cleaning & Standardization
 
-## ⚙️ 4. Gold Layer — Learner Course Pivot & Dashboard
+**File:** `clean_bronze_data.sql`
+
+## Purpose
+Cleans the raw ingested bronze data to ensure **consistent formatting** for downstream analytics. This step removes unwanted characters like:
+
+- Double quotes (`"`)
+- Single quotes (`'`)
+
+from all NVARCHAR/text columns.
+
+## Why This Matters
+When importing CSVs, text fields often retain quotation marks or extra spaces. These inconsistencies can:
+
+- Break joins and lookups  
+- Affect aggregations  
+- Cause mismatched comparisons  
+
+Cleaning the data ensures **reliable and accurate reporting** in the Gold Layer.
+
+## Key Features
+- Removes unwanted characters from all text columns  
+- Standardizes phone numbers and emails  
+- Ensures age ranges and course names are clean  
+- Prepares data for aggregation in Gold Layer
+
+## Example Run
+```sql
+-- Clean bronze data
+EXEC clean_bronze_data;
+
+-- Check cleaned data
+SELECT TOP 10 * FROM bronze.pw_learner_activity;
+```
+
+## ⚙️ 3. Gold Layer — Learner Course Pivot & Dashboard
 
 **File:** `generate_course_performance_pivot.sql`
 
