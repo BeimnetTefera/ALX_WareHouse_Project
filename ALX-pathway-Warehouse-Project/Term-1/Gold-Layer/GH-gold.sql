@@ -39,10 +39,10 @@ SELECT
 
     TRIM(
     CASE 
-        WHEN cp.contact_phone LIKE '20%' THEN 
-            '+20' + RIGHT(cp.contact_phone, LEN(cp.contact_phone) - 2)
+        WHEN cp.contact_phone LIKE '233%' THEN 
+            '+233' + RIGHT(cp.contact_phone, LEN(cp.contact_phone) - 3)
         WHEN cp.contact_phone LIKE '0%' THEN 
-            '+20' + RIGHT(cp.contact_phone, LEN(cp.contact_phone) - 1)
+            '+233' + RIGHT(cp.contact_phone, LEN(cp.contact_phone) - 1)
         ELSE 
             cp.contact_phone
     END
