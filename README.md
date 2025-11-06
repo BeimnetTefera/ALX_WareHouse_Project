@@ -1,5 +1,15 @@
-# ALX_WareHouse_Project
-ETL pipeline project for data warehouse using CSV extractions
+🎓 ALX Data Warehouse ETL Pipeline (Bronze → Silver → Gold)
+📘 Overview
+
+This SQL-based ETL (Extract, Transform, Load) pipeline powers the ALX Data Warehouse, handling the full data flow from raw CSV ingestion to structured analytics-ready tables.
+
+The project follows a medallion architecture:
+
+Bronze Layer → Raw data ingestion from CSV files.
+
+Silver Layer → Data cleaning and normalization.
+
+Gold Layer → Aggregated learner performance and analytics.
 
 
 ## Data WareHouse Diagram
