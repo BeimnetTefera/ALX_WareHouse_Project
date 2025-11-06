@@ -43,4 +43,5 @@ SQL Server’s xp_fileexist and OPENROWSET features.
 The helper function dbo.SplitCSV for parsing CSV lines.
 
 Example Run
+
 EXEC bronze.load_bronze;
