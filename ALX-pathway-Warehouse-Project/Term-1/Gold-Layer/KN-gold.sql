@@ -39,14 +39,14 @@ SELECT
 
     TRIM(
     CASE 
-        WHEN cp.contact_phone LIKE '20%' THEN 
-            '+20' + RIGHT(cp.contact_phone, LEN(cp.contact_phone) - 2)
+        WHEN cp.contact_phone LIKE '254%' THEN 
+            '+254' + RIGHT(cp.contact_phone, LEN(cp.contact_phone) - 3)
         WHEN cp.contact_phone LIKE '0%' THEN 
-            '+20' + RIGHT(cp.contact_phone, LEN(cp.contact_phone) - 1)
+            '+254' + RIGHT(cp.contact_phone, LEN(cp.contact_phone) - 1)
         ELSE 
             cp.contact_phone
     END
- ) AS [Phone_Number],
+) AS [Phone_Number],
     TRIM(cp.email) AS [Email],
     TRIM(cp.age_range) AS [Age_Range],
 
