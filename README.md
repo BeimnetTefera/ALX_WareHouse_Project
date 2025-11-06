@@ -1,5 +1,5 @@
-## 🎓 ALX Data Warehouse ETL Pipeline (Bronze → Silver → Gold)
-# 📘 Overview
+# 🎓 ALX Data Warehouse ETL Pipeline (Bronze → Silver → Gold)
+## 📘 Overview
 
 This SQL-based ETL (Extract, Transform, Load) pipeline powers the ALX Data Warehouse, handling the full data flow from raw CSV ingestion to structured analytics-ready tables.
 
