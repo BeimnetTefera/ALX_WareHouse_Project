@@ -45,3 +45,21 @@ The helper function dbo.SplitCSV for parsing CSV lines.
 Example Run :-
 
   EXEC bronze.load_bronze;
+
+# 2. Silver Layer — Data Cleaning
+
+File: clean_bronze_data.sql
+
+## Purpose
+
+Cleans the ingested bronze data by removing unwanted characters like double quotes (") and single quotes (') from all NVARCHAR columns.
+
+## Why This Matters
+
+When CSV data is imported, text fields often retain quotation marks that can break joins, aggregations, or comparisons. This cleaning script standardizes all text fields for consistent analysis downstream.
+
+Example Run
+
+USE AlxDataWareHouse;
+
+-- Execute the update statement to clean bronze data
