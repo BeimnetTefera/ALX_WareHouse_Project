@@ -5,11 +5,11 @@ This SQL-based ETL (Extract, Transform, Load) pipeline powers the ALX Data Wareh
 
 The project follows a medallion architecture:
 
-Bronze Layer → Raw data ingestion from CSV files.
+- Bronze Layer → Raw data ingestion from CSV files.
 
-Silver Layer → Data cleaning and normalization.
+- Silver Layer → Data cleaning and normalization.
 
-Gold Layer → Aggregated learner performance and analytics.
+- Gold Layer → Aggregated learner performance and analytics.
 
 
 ## Data WareHouse Diagram
