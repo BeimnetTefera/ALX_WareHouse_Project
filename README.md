@@ -39,3 +39,20 @@ Loads raw student activity data from a CSV file into the `bronze.pw_learner_acti
 ### Example Run
 ```sql
 EXEC bronze.load_bronze;
+```
+
+## ⚙️ 4. Gold Layer — Learner Course Pivot & Dashboard
+
+**File:** `generate_course_performance_pivot.sql`
+
+### Purpose
+Transforms the aggregated learner performance into a **course-wise pivot table** for easy reporting. This makes it simple to see **each learner’s submissions, passes, failed assignments, and missed assignments per course**.
+
+### Key Features
+- Converts course-level metrics into columns
+- Handles multiple courses dynamically using `CASE` and `COALESCE`
+- Formats phone numbers consistently
+- Calculates an overall **Learner Status**:
+  - **On Track** → LMS score ≥ 70
+  - **Needs Improvement** → 50 ≤ score < 70
+  - **Off Track** → LMS score < 50
